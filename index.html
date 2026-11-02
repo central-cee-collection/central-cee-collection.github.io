@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Check and claim earnings for Central Cee Collection NFTs on BNB Smart Chain.">
+  <title>Central Cee Collection — NFT earnings</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./vendor/ethers.umd.min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="topbar-label">CENTRAL CEE COLLECTION</div>
+      <span class="network-pill">BNB SMART CHAIN</span>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">NFT EARNINGS</p>
+      <h1 id="page-title">Claim what your NFTs have earned.</h1>
+      <p class="intro">Enter the wallet that holds your Central Cee Collection NFTs. You can check earnings without connecting a wallet. To withdraw, connect that same wallet and approve each transaction.</p>
+      <aside class="disclaimer" aria-labelledby="disclaimer-title">
+        <h2 id="disclaimer-title">Important notice</h2>
+        <p>This claim tool is provided “as is” as a service to Central Cee Collection NFT holders. Use it at your own risk. No responsibility is accepted for lost funds or other losses, including losses caused by bugs or errors in this page or its scripts. Check the details of every transaction in your wallet before approving it.</p>
+      </aside>
+    </section>
+
+    <section class="panel" aria-labelledby="form-title">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">01 / CHECK</p>
+          <h2 id="form-title">Find your earnings</h2>
+        </div>
+        <button class="button button-quiet" id="connectButton" type="button">Connect wallet</button>
+      </div>
+
+      <div class="form-grid">
+        <label class="field field-wide" for="wallet">
+          <span>Wallet address</span>
+          <input id="wallet" type="text" inputmode="text" spellcheck="false" autocomplete="off" placeholder="0x…" aria-describedby="wallet-help">
+        </label>
+        <p class="field-help" id="wallet-help">Only the wallet that currently owns the NFTs can receive the claim.</p>
+
+        <label class="field" for="token">
+          <span>Currency</span>
+          <select id="token">
+            <option value="0x55d398326f99059fF775485246999027B3197955">USDT</option>
+            <option value="0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d">USDC</option>
+            <option value="0x0000000000000000000000000000000000000000">BNB</option>
+            <option value="custom">Other BEP-20 token</option>
+          </select>
+        </label>
+        <label class="field" for="customToken" id="customTokenField" hidden>
+          <span>Token contract address</span>
+          <input id="customToken" type="text" inputmode="text" spellcheck="false" autocomplete="off" placeholder="0x…">
+        </label>
+        <p class="field-help">Check USDT and USDC separately to see all currently recorded token distributions.</p>
+      </div>
+
+      <div class="actions">
+        <button class="button button-primary" id="checkButton" type="button">Check earnings <span aria-hidden="true">↗</span></button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite">Ready to check.</p>
+    </section>
+
+    <section class="panel results" id="results" aria-labelledby="results-title" hidden>
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">02 / WITHDRAW</p>
+          <h2 id="results-title">Your available earnings</h2>
+        </div>
+      </div>
+      <div class="summary-grid">
+        <div class="stat"><span class="stat-label">Available</span><strong id="availableAmount">—</strong></div>
+        <div class="stat"><span class="stat-label">NFTs held</span><strong id="heldCount">—</strong></div>
+        <div class="stat"><span class="stat-label">Transactions needed</span><strong id="transactionCount">—</strong></div>
+      </div>
+      <p class="meta-line" id="contractStatus"></p>
+      <details class="id-details">
+        <summary>View NFT IDs used for this check</summary>
+        <p id="nftIds"></p>
+      </details>
+      <div class="periods" id="periods"></div>
+      <p class="notice" id="claimNotice"></p>
+      <div class="actions" id="claimActions">
+        <button class="button button-primary" id="claimButton" type="button" disabled>Withdraw available earnings <span aria-hidden="true">↗</span></button>
+        <button class="button button-quiet" id="stopButton" type="button" hidden>Stop after current transaction</button>
+      </div>
+    </section>
+
+    <section class="panel transactions" id="transactionsSection" aria-labelledby="transactions-title" hidden>
+      <p class="eyebrow">ACTIVITY</p>
+      <h2 id="transactions-title">Transactions</h2>
+      <ol id="transactions"></ol>
+    </section>
+
+    <footer class="footer">
+      <p>This page never asks for a seed phrase or private key. Claims are sent directly to the NFT owner by the contract. You need BNB in your wallet for network fees.</p>
+      <p>Contract: <a href="https://bscscan.com/address/0x9046f917E089e030Dc9C63D53202Ff85654f386e" target="_blank" rel="noopener noreferrer">0x9046…386e ↗</a></p>
+    </footer>
+  </main>
+</body>
+</html>
